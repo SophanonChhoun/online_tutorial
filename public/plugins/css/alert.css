@@ -1,0 +1,11 @@
+.swal2-icon {
+    border-radius: 50%!important;
+}
+
+.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left] {
+    border-radius: 120px 0 0 120px!important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-radius: 50%!important;
+}
