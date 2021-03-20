@@ -86,56 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/contact_us/create.js":
-/*!*******************************************!*\
-  !*** ./resources/js/contact_us/create.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-new Vue({
-  el: '#createContactUs',
-  data: {
-    data: {
-      is_enable: '',
-      address: '',
-      phone_number: '',
-      fax: '',
-      email: '',
-      title: ''
-    },
-    error: '',
-    is_submit: false
-  },
-  mounted: function mounted() {},
-  methods: {
-    submit: function submit() {
-      var _this = this;
-
-      this.$validator.validateAll().then(function (result) {
-        _this.is_submit = true;
-        var save = true;
-
-        if (result && save) {
-          axios.post('/admin/contact_us/create', _this.data).then(function (response) {
-            if (response.data.success) {
-              window.location.href = '/admin/contact_us/list';
-            } else {
-              console.log(response.data.message);
-              _this.error = response.data.message;
-            }
-          });
-        } else {
-          //set Window location to top
-          window.scrollTo(0, 0);
-        }
-      });
-    }
-  }
-});
-
-/***/ }),
-
 /***/ 12:
 /*!*************************************************!*\
   !*** multi ./resources/js/contact_us/create.js ***!
@@ -143,7 +93,7 @@ new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/web_project/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/contact_us/create.js */"./resources/js/contact_us/create.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/contact_us/create.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })

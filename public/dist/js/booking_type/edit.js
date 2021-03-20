@@ -86,63 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/booking_type/edit.js":
-/*!*******************************************!*\
-  !*** ./resources/js/booking_type/edit.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-new Vue({
-  el: '#editBookingType',
-  data: {
-    data: data,
-    test: [],
-    is_submit: false,
-    error: ''
-  },
-  computed: {},
-  methods: {
-    submit: function submit() {
-      var _this = this;
-
-      this.$validator.validateAll().then(function (result) {
-        _this.is_submit = true;
-        var save = true;
-
-        if (result && save) {
-          axios.post('/admin/bookings_type/update', {
-            "data": _this.data
-          }).then(function (response) {
-            if (response.data.success) {
-              window.location.href = '/admin/bookings_type/list';
-            } else {
-              _this.error = response.data.message;
-            }
-          });
-        } else {
-          window.scrollTo(0, 0);
-        }
-      });
-    },
-    addRoom: function addRoom() {
-      this.data.push({
-        name: '',
-        is_enable: '',
-        sort: this.data.length + 1
-      });
-    },
-    removeRoom: function removeRoom(index) {
-      this.data.splice(index, 1);
-      this.data.forEach(function (item, i) {
-        item.sort = i + 1;
-      });
-    }
-  }
-});
-
-/***/ }),
-
 /***/ 15:
 /*!*************************************************!*\
   !*** multi ./resources/js/booking_type/edit.js ***!
@@ -150,7 +93,7 @@ new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/web_project/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/booking_type/edit.js */"./resources/js/booking_type/edit.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/booking_type/edit.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })

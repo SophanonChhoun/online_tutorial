@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -453,14 +453,14 @@ new Vue({
 
 /***/ }),
 
-/***/ 23:
+/***/ 6:
 /*!**********************************************!*\
   !*** multi ./resources/js/profile/avatar.js ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/web_project/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/profile/avatar.js */"./resources/js/profile/avatar.js");
+module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/profile/avatar.js */"./resources/js/profile/avatar.js");
 
 
 /***/ })

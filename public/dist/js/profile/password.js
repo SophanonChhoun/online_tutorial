@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -128,14 +128,14 @@ new Vue({
 
 /***/ }),
 
-/***/ 22:
+/***/ 5:
 /*!************************************************!*\
   !*** multi ./resources/js/profile/password.js ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/web_project/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/profile/password.js */"./resources/js/profile/password.js");
+module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/profile/password.js */"./resources/js/profile/password.js");
 
 
 /***/ })

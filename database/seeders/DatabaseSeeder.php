@@ -17,18 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-//        $this->call(AboutUsSeeder::class);
-//        $this->call(BookingHasRoomSeeder::class);
-//        $this->call(BookingRoomTypeSeeder::class);
-//        $this->call(BookingSeeder::class);
-//        $this->call(BookingTypesSeeder::class);
-//        $this->call(CustomerSeeder::class);
-//        $this->call(HotelSeeder::class);
-//        $this->call(IdentificationTypeSeeder::class);
-//        $this->call(PaymentTypeSeeder::class);
-//        $this->call(RoomSeeder::class);
-//        $this->call(RoomTypeSeeder::class);
-        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
     }
 }

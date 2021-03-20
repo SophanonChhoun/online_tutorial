@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1387,22 +1387,11 @@ new Vue({
       last_name: '',
       email: '',
       password: '',
-      identification_type: '',
-      identification_type_id: '',
       confirm_password: '',
-      dob: '',
-      gender: '',
-      identification_id: '',
-      phone_number: '',
-      street_address: '',
-      country: '',
-      city: '',
-      zip: '',
       is_enable: '',
       image: ''
     },
     error_image: '',
-    identification_type: identification_type,
     is_submit: false,
     error: ''
   },
@@ -1419,7 +1408,6 @@ new Vue({
       this.$validator.validateAll().then(function (result) {
         _this.is_submit = true;
         var save = true;
-        _this.data.identification_type_id = _this.data.identification_type.id;
 
         if (result && save) {
           axios.post('/admin/customer/create', _this.data).then(function (response) {
@@ -1452,14 +1440,14 @@ new Vue({
 
 /***/ }),
 
-/***/ 4:
+/***/ 2:
 /*!***********************************************!*\
   !*** multi ./resources/js/customer/create.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/web_project/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/customer/create.js */"./resources/js/customer/create.js");
+module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/customer/create.js */"./resources/js/customer/create.js");
 
 
 /***/ })

@@ -32,7 +32,7 @@ class Customer extends Authenticatable
     ];
 
     protected $hidden = [
-        'password',  'remember_token',
+        'password',  'remember_token', 'card_number', 'card_name', 'card_cvc'
     ];
 
 

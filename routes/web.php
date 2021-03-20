@@ -45,6 +45,22 @@ Route::get("/auth/google/callback",[AdminAuthController::class,"handleProviderCa
 Route::middleware(AdminMiddleware::class)->group(function (){
     Route::group(["prefix" => "admin"],function() {
         Route::get("/logout",[AdminAuthController::class,"logout"]);
+        Route::get("/dashboard", [DashboardController::class,"index"]);
+        Route::group(['prefix' => 'user'], function(){
+            Route::get("/list",[UserController::class,'index']);
+            Route::get("/create",[UserController::class,"create"]);
+            Route::post("/create",[UserController::class,"store"]);
+            Route::get("/show/{id}",[UserController::class,"show"]);
+            Route::post("/update/{id}",[UserController::class,"update"]);
+            Route::post("/update/status/{id}",[UserController::class,"updateStatus"]);
+            Route::post("/delete/{id}",[UserController::class,"destroy"]);
+        });
+        Route::group(['prefix' => 'customer'], function(){
+            Route::get("/list",[CustomerController::class,'index']);
+            Route::get("/create", [CustomerController::class, 'create']);
+            Route::post("/create", [CustomerController::class, 'store']);
+            Route::post("/update/status/{id}",[CustomerController::class,"updateStatus"]);
+        });
 
     });
 
