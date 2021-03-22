@@ -9,6 +9,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +55,16 @@ Route::middleware(AdminMiddleware::class)->group(function (){
             Route::post("/update/{id}",[CategoryController::class,"update"]);
             Route::post("/update/status/{id}",[CategoryController::class,"updateStatus"]);
             Route::post("/delete/{id}",[CategoryController::class,"destroy"]);
+        });
+
+        Route::group(['prefix' => 'course'], function(){
+            Route::get("/list",[CourseController::class,'index']);
+            Route::get("/create", [CourseController::class, 'create']);
+            Route::post("/create", [CourseController::class, 'store']);
+            Route::get("/show/{id}",[CourseController::class,"show"]);
+            Route::post("/update/{id}",[CourseController::class,"update"]);
+            Route::post("/update/status/{id}",[CourseController::class,"updateStatus"]);
+            Route::post("/delete/{id}",[CourseController::class,"destroy"]);
         });
     });
 

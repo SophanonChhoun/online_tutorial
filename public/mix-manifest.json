@@ -6,6 +6,8 @@
     "/css/profile.css": "/css/profile.css",
     "/dist/js/category/create.js": "/dist/js/category/create.js",
     "/dist/js/category/edit.js": "/dist/js/category/edit.js",
+    "/dist/js/course/create.js": "/dist/js/course/create.js",
+    "/dist/js/course/edit.js": "/dist/js/course/edit.js",
     "/dist/js/customer/create.js": "/dist/js/customer/create.js",
     "/dist/js/profile/avatar.js": "/dist/js/profile/avatar.js",
     "/dist/js/profile/info.js": "/dist/js/profile/info.js",
