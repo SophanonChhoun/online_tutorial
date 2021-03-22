@@ -58,7 +58,12 @@ class CustomerAuthController extends Controller
                     $credential->id
                 );
                 DB::commit();
-                return $this->success($auth);
+                return $this->success([
+                    'token' => $auth['access_token'],
+                    'email' => $auth['customer']['email'],
+                    'first_name' => $auth['customer']['first_name'],
+                    'last_name' => $auth['customer']['last_name'],
+                ]);
 
             }else{
                 return $this->fail("Wrong details");
@@ -109,7 +114,12 @@ class CustomerAuthController extends Controller
                 $credential->id
             );
             DB::commit();
-            return $this->success($auth);
+            return $this->success([
+                'token' => $auth['access_token'],
+                'email' => $auth['customer']['email'],
+                'first_name' => $auth['customer']['first_name'],
+                'last_name' => $auth['customer']['last_name'],
+            ]);
 
         } catch (\Exception $e) {
             report($e);

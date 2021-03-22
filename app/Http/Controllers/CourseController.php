@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Core\MediaLib;
+use App\Http\Resources\CourseResource;
+use App\Http\Resources\LessonResource;
 use App\Models\admin\Course;
 use Illuminate\Http\Request;
 use Exception;
@@ -100,4 +102,36 @@ class CourseController extends Controller
     public function updateStatus($id, Request $request){}
 
     public function destroy($id){}
+
+    public function getAllCourse(){
+        $courses = Course::with("category", "lessons", "media")->latest()->get();
+        $courses = $courses->map(function($course) {
+            $h = round($course->lessons->pluck("duration")->sum() / 60);
+            $m = $course->lessons->pluck("duration")->sum() % 60;
+            $course['durations'] = $h."h".$m."mn";
+            $course['number_lessons'] = $course->lessons->count();
+            return $course;
+        });
+        return $this->success(CourseResource::collection($courses));
+    }
+
+    public function getCourse($id)
+    {
+        $course = Course::with("category", "lessons", "media")->find($id);
+        $h = round($course->lessons->pluck("duration")->sum() / 60);
+        $m = $course->lessons->pluck("duration")->sum() % 60;
+        $course['durations'] = $h."h".$m."mn";
+        $course['number_lessons'] = $course->lessons->count();
+
+        return $this->success([
+            'id' => $course->id,
+            'header_image' => $course->media->file_url ?? null,
+            'title' => $course->title,
+            'description' => $course->description,
+            'author' => $course->author,
+            'duration' => $course->duration,
+            'number_of_lessons' => $course->number_lessons,
+            'lessons' => LessonResource::collection($course->lessons),
+        ]);
+    }
 }

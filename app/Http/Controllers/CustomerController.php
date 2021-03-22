@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Core\MediaLib;
 use App\Http\Controllers\Input;
+use App\Http\Resources\CustomerProfileResource;
 use App\Http\Resources\CustomerResource;
 use App\Models\admin\Customer;
 use App\Models\admin\IdentificationType;
@@ -69,6 +70,25 @@ class CustomerController extends Controller
                 "is_enable" => $request->is_enable
             ]);
             return back();
+        }catch (Exception $exception){
+            return $this->fail($exception->getMessage());
+        }
+    }
+
+    public function getProfile(){
+        $user = Customer::find(auth()->user()->id);
+
+        return $this->success([
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+        ]);
+    }
+
+    public function updateProfile(Request $request){
+        try {
+            Customer::find(auth()->user()->id)->update($request->all());
+            return $this->success("Update Success");
         }catch (Exception $exception){
             return $this->fail($exception->getMessage());
         }
