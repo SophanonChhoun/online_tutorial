@@ -45,11 +45,6 @@ class Customer extends Authenticatable
 
     }
 
-    public function identification_type()
-    {
-        return $this->belongsTo(IdentificationType::class,"identification_type_id","id");
-    }
-
     public function media()
     {
         return $this->belongsTo(MediaFile::class,"media_id");

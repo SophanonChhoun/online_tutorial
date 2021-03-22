@@ -14,6 +14,9 @@
                 <a href="/admin/customer/list" class="nav-link {{ request()->is('admin/customer*') ? 'active' : '' }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                     Customer</a>
+                <a href="/admin/category/list" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                    Category</a>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
                     Bookings

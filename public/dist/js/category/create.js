@@ -81,22 +81,25 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/profile/info.js":
-/*!**************************************!*\
-  !*** ./resources/js/profile/info.js ***!
-  \**************************************/
+/***/ "./resources/js/category/create.js":
+/*!*****************************************!*\
+  !*** ./resources/js/category/create.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 new Vue({
-  el: '#editInfo',
+  el: '#createCategory',
   data: {
-    data: data,
+    data: {
+      name: '',
+      is_enable: ''
+    },
     is_submit: false
   },
   mounted: function mounted() {},
@@ -109,13 +112,16 @@ new Vue({
         var save = true;
 
         if (result && save) {
-          axios.post('/admin/profile/update', _this.data).then(function (response) {
+          axios.post('/admin/category/create', _this.data).then(function (response) {
             if (response.data.success) {
-              window.location.href = '/admin/profile/show';
+              window.location.href = '/admin/category/list';
             } else {
               alert(response.data.data);
-              _this.error = response.data.message;
+              hideLoading();
             }
+          })["catch"](function (error) {
+            showAlertError(error.response.data.message);
+            hideLoading();
           });
         } else {
           //set Window location to top
@@ -128,14 +134,14 @@ new Vue({
 
 /***/ }),
 
-/***/ 9:
-/*!********************************************!*\
-  !*** multi ./resources/js/profile/info.js ***!
-  \********************************************/
+/***/ 7:
+/*!***********************************************!*\
+  !*** multi ./resources/js/category/create.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/profile/info.js */"./resources/js/profile/info.js");
+module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/category/create.js */"./resources/js/category/create.js");
 
 
 /***/ })

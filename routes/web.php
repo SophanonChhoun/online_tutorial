@@ -2,28 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\HotelController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\IdentificationController;
-use App\Http\Controllers\IdentificationTypeController;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\BookingTypeController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\PaymentTypeController;
-use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\ContactUsController;
 use \Illuminate\Support\Facades\App;
-use App\Http\Controllers\LocalizationController;
-use App\Http\Controllers\SlidersController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ReportController;
-use App\Http\Middleware\AdminRoleMiddleware;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,7 +46,15 @@ Route::middleware(AdminMiddleware::class)->group(function (){
             Route::post("/create", [CustomerController::class, 'store']);
             Route::post("/update/status/{id}",[CustomerController::class,"updateStatus"]);
         });
-
+        Route::group(['prefix' => 'category'], function(){
+            Route::get("/list",[CategoryController::class,'index']);
+            Route::get("/create", [CategoryController::class, 'create']);
+            Route::post("/create", [CategoryController::class, 'store']);
+            Route::get("/show/{id}",[CategoryController::class,"show"]);
+            Route::post("/update/{id}",[CategoryController::class,"update"]);
+            Route::post("/update/status/{id}",[CategoryController::class,"updateStatus"]);
+            Route::post("/delete/{id}",[CategoryController::class,"destroy"]);
+        });
     });
 
 });
