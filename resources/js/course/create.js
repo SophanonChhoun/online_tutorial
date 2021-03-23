@@ -13,7 +13,6 @@ new Vue({
     data: {
         data: {
             title: '',
-            author: '',
             description: '',
             category_id: '',
             image: '',
@@ -94,6 +93,7 @@ new Vue({
                     duration: '',
                     video_url: '',
                     text_content: '',
+                    number: '',
                 },
                 sort: this.data.lessons.length + 1,
             });

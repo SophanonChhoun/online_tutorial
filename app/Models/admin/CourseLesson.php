@@ -13,6 +13,11 @@ class CourseLesson extends Model
         "title",
         "duration",
         "video_url",
-        "text_content"
+        "text_content",
+        "number"
     ];
+
+    public function course(){
+        return $this->belongsTo(Course::class, "course_id", "id");
+    }
 }

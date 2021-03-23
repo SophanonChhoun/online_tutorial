@@ -7,6 +7,8 @@ use App\Http\Middleware\CustomerMiddleware;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerCourseController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\CourseLessonController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,6 +36,16 @@ Route::middleware(CustomerMiddleware::class)->group(function (){
         Route::post("/courses", [CustomerCourseController::class, 'store']);
         Route::delete("/courses", [CustomerCourseController::class, 'destroy']);
         Route::get("/courses", [CustomerCourseController::class, 'index']);
+        Route::get("/notes", [NoteController::class, "userNote"]);
+    });
+    Route::group(['prefix' => 'notes'], function (){
+        Route::post("", [NoteController::class, 'store']);
+        Route::get("/{id}", [NoteController::class, 'show']);
+        Route::delete("/{id}", [NoteController::class, 'destroy']);
+        Route::put("/{id}", [NoteController::class, 'update']);
+    });
+    Route::group(['prefix' => 'lessons'], function(){
+       Route::get("/{id}", [CourseLessonController::class, "show"]);
     });
 });
 

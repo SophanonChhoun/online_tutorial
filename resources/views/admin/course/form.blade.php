@@ -19,20 +19,6 @@
                            placeholder="Title">
                     <span class="help-block">@{{ errors.first('title') }}</span>
                 </div>
-                <div class="form-group col-lg-12" :class="{'has-error' : errors.first('author')}">
-                    <label class="control-label">
-                        Author
-                        <span style="color: red">*</span>
-                    </label>
-                    <input type="text"
-                           name="author"
-                           v-model="data.author"
-                           data-vv-as="Author"
-                           v-validate="'required'"
-                           class="form-control"
-                           placeholder="Author">
-                    <span class="help-block">@{{ errors.first('author') }}</span>
-                </div>
 
                 <div class="form-group col-lg-12" :class="{'has-error' : errors.first('category')}">
                     <label class="control-label">
@@ -103,6 +89,20 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
+                                <div class="form-group col-lg-12" :class="{'has-error' : errors.first('number')}">
+                                    <label class="control-label">
+                                        Lesson no:
+                                        <span style="color: red">*</span>
+                                    </label>
+                                    <input type="number"
+                                           name="number"
+                                           v-model="lesson.number"
+                                           data-vv-as="Number"
+                                           v-validate="'required'"
+                                           class="form-control"
+                                           placeholder="Number">
+                                    <span class="help-block">@{{ errors.first('number') }}</span>
+                                </div>
                                 <div class="form-group col-lg-12" :class="{'has-error' : errors.first('title')}">
                                     <label class="control-label">
                                         Title

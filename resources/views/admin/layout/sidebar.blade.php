@@ -15,23 +15,14 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                     Customer</a>
                 <a href="/admin/category/list" class="nav-link {{ request()->is('admin/category*') ? 'active' : '' }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-bold"></i></div>
                     Category</a>
                 <a href="/admin/course/list" class="nav-link {{ request()->is('admin/course*') ? 'active' : '' }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-code"></i></div>
                     Course</a>
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
-                    Bookings
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link {{ request()->is("admin/bookings*") ? 'active' : '' }}" href="{{ url('admin/bookings/list') }}">Booking</a>
-                        <a class="nav-link {{ request()->is("admin/bookings_type*") ? 'active' : '' }}" href="{{ url('admin/bookings_type/list') }}">Booking Type</a>
-                    </nav>
-                </div>
-
+                <a href="/admin/lesson/list" class="nav-link {{ request()->is('admin/lesson*') ? 'active' : '' }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                    Lesson</a>
             </div>
         </div>
     </nav>

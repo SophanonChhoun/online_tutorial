@@ -1708,7 +1708,6 @@ new Vue({
   data: {
     data: {
       title: '',
-      author: '',
       description: '',
       category_id: '',
       image: '',
@@ -1797,7 +1796,8 @@ new Vue({
           title: '',
           duration: '',
           video_url: '',
-          text_content: ''
+          text_content: '',
+          number: ''
         },
         sort: this.data.lessons.length + 1
       });

@@ -1,9 +1,8 @@
-<div class="col-lg-12">
-    <div class="portlet blue box">
-        <div class="portlet-title">
-            <div class="caption"><i class="icon-picture"></i>User</div>
-        </div>
-        <div class="portlet-body">
+@extends("admin.profile.index")
+
+@section("content_profile")
+    <div id="editInfo" v-cloak>
+        <form action="#" @submit.prevent="submit" class="form-horizontal">
             <div class="row">
                 <div class="form-group col-lg-12" :class="{'has-error' : errors.first('first_name')}">
                     <label class="control-label">
@@ -80,61 +79,20 @@
                     <span class="help-block">@{{ errors.first('email') }}</span>
                 </div>
 
-                @if(request()->is("admin/user/create"))
-                    <div class="form-group col-lg-12" :class="{'has-error' : errors.first('password')}">
-                        <label class="control-label">
-                            Password
-                            <span style="color: red">*</span>
-                        </label>
-                        <input type="password"
-                               name="password"
-                               v-model="data.password"
-                               data-vv-as="Password"
-                               v-validate="'required'"
-                               class="form-control"
-                               placeholder="password">
-                        <span class="help-block">@{{ errors.first('password') }}</span>
-                    </div>
-                @endif
-
-                <div class="form-group col-lg-12" :class="{'has-error' : error_image}">
-                    <label class="control-label">
-                        Profile
-                        <span style="color: red">*</span>
-                    </label>
-                    <single-image-uploader
-                        :error="data.error_image"
-                        label="{{ __('general.image') }}"
-                        ph="400"
-                        pw="300"
-                        default-image="{{ asset('image/noimage.png') }}"
-                        :image="data.image ? data.image : (data.media ? data.media.file_url : '{{asset('image/noimage.png')}}')"
-                        v-model="data.image"
-                        :name="'profile'"
-                        v-validate="{required: data.image ? true : false}"
-                        data-vv-as="Profile"
-                    ></single-image-uploader>
-                    <span class="help-block">@{{ error_image }}</span>
-
-                </div>
-
-                <div class="form-group col-lg-12" :class="{'has-error' : errors.first('is_enable')}">
-                    <label class="control-label">
-                        @lang('general.status')
-                        <span style="color: red">*</span>
-                    </label>
-                    <input type="checkbox"
-                           style="margin-left: 2%"
-                           name="is_enable"
-                           v-model="data.is_enable"
-                           data-vv-as="@lang('general.status')"
-                           v-validate="'required'"
-                    >
-                    <span class="help-block">@{{ errors.first('is_enable') }}</span>
-                </div>
-
-                <br>
             </div>
-        </div>
+            <div class="text-right">
+                <button type="submit" id="submit"
+                        class="btn btn-success save-cancel">@lang('general.save')</button>
+            </div>
+        </form>
     </div>
-</div>
+
+@endsection
+
+@section("script")
+    <script>
+        const data = @json($data);
+    </script>
+    <script src="{{ mix('/dist/js/app.js') }}"></script>
+    <script src="{{ mix('/dist/js/profile/info.js') }}"></script>
+@endsection

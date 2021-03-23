@@ -22,14 +22,11 @@ new Vue({
             is_enable: '',
             password: '',
             image: '',
-            role_id: '',
-            role: '',
         },
         is_submit: false,
         error: '',
         error_image: '',
         image: '',
-        roles: roles,
     },
     mounted() {
     },
@@ -45,7 +42,6 @@ new Vue({
                 }else{
                     this.error_image = "";
                 }
-                this.data.role_id = this.data.role.id;
                 if(result && save) {
                     axios.post('/admin/user/create',this.data).then(response => {
                        if(response.data.success){

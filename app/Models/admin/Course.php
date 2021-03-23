@@ -13,7 +13,7 @@ class Course extends Model
         "media_id",
         "title",
         "description",
-        "author",
+        "author_id",
         "category_id",
         "is_enable"
     ];
@@ -24,6 +24,10 @@ class Course extends Model
     public function category()
     {
         return $this->hasOne(Category::class,"id","category_id");
+    }
+    public function author()
+    {
+        return $this->hasOne(User::class,"id","author_id");
     }
     public function lessons()
     {
@@ -39,7 +43,8 @@ class Course extends Model
                "title" => $lesson['title'],
                "duration" => $lesson['duration'],
                "video_url" => $lesson['video_url'],
-               "text_content" => $lesson['text_content']
+               "text_content" => $lesson['text_content'],
+               "number" => $lesson['number'],
             ]);
         }
     }

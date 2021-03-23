@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\CustomerController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CourseLessonController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +67,19 @@ Route::middleware(AdminMiddleware::class)->group(function (){
             Route::post("/update/{id}",[CourseController::class,"update"]);
             Route::post("/update/status/{id}",[CourseController::class,"updateStatus"]);
             Route::post("/delete/{id}",[CourseController::class,"destroy"]);
+        });
+
+        Route::group(['prefix' => 'lesson'], function(){
+            Route::get("/list",[CourseLessonController::class,'index']);
+        });
+
+        Route::group(['prefix' => "profile"],function (){
+            Route::get("/show",[ProfileController::class,"show"]);
+            Route::post("/update",[ProfileController::class,"update"]);
+            Route::get("/change/password",[ProfileController::class,"changePassword"]);
+            Route::post("/password",[ProfileController::class,"updatePassword"]);
+            Route::get("/change/avatar",[ProfileController::class,"changeAvatar"]);
+            Route::post("/avatar",[ProfileController::class,"updateAvatar"]);
         });
     });
 

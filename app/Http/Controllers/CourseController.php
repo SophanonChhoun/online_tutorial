@@ -13,8 +13,17 @@ use DB;
 
 class CourseController extends Controller
 {
-    public function index(){
-        $data = Course::with("media", "lessons")->latest()->paginate(10);
+    public function index(Request $request){
+        $data = Course::with("media", "lessons");
+        if(isset($request->search))
+        {
+            $data = $data->where("title","LIKE","%".$request->search."%");
+        }
+        if(isset($request->is_enable))
+        {
+            $data = $data->where("is_enable", $request->is_enable);
+        }
+        $data = $data->latest()->paginate(10);
         $data->getCollection()->transform(function ($course) {
             $h = round($course->lessons->pluck("duration")->sum() / 60);
             $m = $course->lessons->pluck("duration")->sum() % 60;
@@ -36,7 +45,7 @@ class CourseController extends Controller
             $course = [
                 "title" => $request->title,
                 "description" => $request->description,
-                "author" => $request->author,
+                "author_id" => auth()->user()->id,
                 "category_id" => $request->category_id,
                 "is_enable" => $request->is_enable,
             ];
@@ -77,7 +86,7 @@ class CourseController extends Controller
             $data = [
                 "title" => $request->title,
                 "description" => $request->description,
-                "author" => $request->author,
+                "author_id" => auth()->user()->id,
                 "category_id" => $request->category_id,
                 "is_enable" => $request->is_enable,
             ];
@@ -99,9 +108,25 @@ class CourseController extends Controller
         }
     }
 
-    public function updateStatus($id, Request $request){}
+    public function updateStatus($id, Request $request){
+        try {
+            Course::find($id)->update([
+                "is_enable" => $request->is_enable
+            ]);
+            return back();
+        }catch (Exception $exception){
+            return $this->fail($exception->getMessage());
+        }
+    }
 
-    public function destroy($id){}
+    public function destroy($id){
+        try {
+            Course::find($id)->delete();
+            return back();
+        }catch (Exception $exception){
+            return $this->fail($exception->getMessage());
+        }
+    }
 
     public function getAllCourse(){
         $courses = Course::with("category", "lessons", "media")->latest()->get();

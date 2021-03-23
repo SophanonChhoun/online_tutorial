@@ -13,7 +13,7 @@
         <tr>
             <td>{{ $course->title }}</td>
             <td>{{ $course->durations }}</td>
-            <td>{{ $course->author }}</td>
+            <td>{{ $course->author->name ?? null}}</td>
             <td>{{ $course->category->name ?? null }}</td>
             <td><img src="{{ $course->media->file_url ?? asset('image/noimage.png') }}" class="img-responsive" style="max-height: 200px;max-width: 200px"></td>
             <td>

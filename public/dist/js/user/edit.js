@@ -1392,8 +1392,7 @@ new Vue({
     is_submit: false,
     error: '',
     error_image: '',
-    image: '',
-    roles: roles
+    image: ''
   },
   mounted: function mounted() {},
   methods: {
@@ -1403,7 +1402,6 @@ new Vue({
       this.$validator.validateAll().then(function (result) {
         _this.is_submit = true;
         var save = true;
-        _this.data.role_id = _this.data.role.id;
 
         if (result && save) {
           axios.post('/admin/user/update/' + _this.id, _this.data).then(function (response) {

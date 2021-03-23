@@ -1716,15 +1716,12 @@ new Vue({
       address: '',
       is_enable: '',
       password: '',
-      image: '',
-      role_id: '',
-      role: ''
+      image: ''
     },
     is_submit: false,
     error: '',
     error_image: '',
-    image: '',
-    roles: roles
+    image: ''
   },
   mounted: function mounted() {},
   methods: {
@@ -1741,8 +1738,6 @@ new Vue({
         } else {
           _this.error_image = "";
         }
-
-        _this.data.role_id = _this.data.role.id;
 
         if (result && save) {
           axios.post('/admin/user/create', _this.data).then(function (response) {

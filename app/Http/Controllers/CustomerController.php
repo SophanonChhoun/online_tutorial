@@ -20,9 +20,9 @@ class CustomerController extends Controller
         {
             $customer = $customer->where("email","LIKE","%".$request->search."%");
         }
-        if(isset($request->status))
+        if(isset($request->is_enable))
         {
-            $customer = $customer->where("is_enable",$request->status);
+            $customer = $customer->where("is_enable",$request->is_enable);
         }
 
         $data = $customer->orderBy("id")->paginate(10);
