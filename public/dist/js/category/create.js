@@ -141,7 +141,7 @@ new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/category/create.js */"./resources/js/category/create.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\online_tutorial\resources\js\category\create.js */"./resources/js/category/create.js");
 
 
 /***/ })

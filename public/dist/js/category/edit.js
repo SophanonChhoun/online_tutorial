@@ -1428,7 +1428,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/chhounsophanon/Desktop/mobile_api/hotel_management/Desktop/Laravel/project/hotel_system/resources/js/category/edit.js */"./resources/js/category/edit.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\online_tutorial\resources\js\category\edit.js */"./resources/js/category/edit.js");
 
 
 /***/ })

@@ -36,6 +36,7 @@ Route::post('/register',[CustomerAuthController::class,'register']);
 Route::get("booking/stay",[BookingController::class,"bookingStay"]);
 Route::get("booking-offers", [BookingController::class,"bookingOffer"]);
 Route::middleware(CustomerMiddleware::class)->group(function (){
+    Route::get('/user/profile',[CustomerController::class,'getProfile']);
     Route::group(['prefix' => '/bookings'],function (){
         Route::get('',[BookingController::class,'listCustomer']);
     });

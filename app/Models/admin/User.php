@@ -58,4 +58,6 @@ class User extends Authenticatable
         $user = self::with('media')->find($id);
         return $user;
     }
+
+
 }

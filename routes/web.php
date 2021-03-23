@@ -29,6 +29,9 @@ Route::get("/auth/google/login",[AdminAuthController::class,"redirectToProvider"
 Route::get("/auth/google/callback",[AdminAuthController::class,"handleProviderCallback"]);
 
 Route::middleware(AdminMiddleware::class)->group(function (){
+    Route::group(['prefix' => 'user'], function () {
+        Route::get("/profile", [CustomerController::class,'getProfile']);
+    });
     Route::group(["prefix" => "admin"],function() {
         Route::get("/logout",[AdminAuthController::class,"logout"]);
         Route::get("/dashboard", [DashboardController::class,"index"]);

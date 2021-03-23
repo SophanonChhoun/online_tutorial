@@ -73,4 +73,15 @@ class CustomerController extends Controller
             return $this->fail($exception->getMessage());
         }
     }
+    public function getProfile(Request $request)
+    {
+        $user = Customer::find(auth()->user()->id);
+        return $this->success([
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+        ]);
+
+    }
 }
+

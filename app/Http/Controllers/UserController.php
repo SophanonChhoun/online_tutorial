@@ -143,4 +143,5 @@ class UserController extends Controller
             return $this->fail($e->getMessage());
         }
     }
+
 }
