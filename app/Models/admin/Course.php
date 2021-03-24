@@ -32,7 +32,6 @@ class Course extends Model
     public function lessons()
     {
         return $this->hasMany(CourseLesson::class,"course_id","id");
-
     }
 
     public static function lesson($id, $lessons){

@@ -132,8 +132,7 @@ class CourseController extends Controller
         $courses = Course::with("category", "lessons", "media")->latest()->get();
         $courses = $courses->map(function($course) {
             $h = round($course->lessons->pluck("duration")->sum() / 60);
-            $m = $course->lessons->pluck("duration")->sum() % 60;
-            $course['durations'] = $h."h".$m."mn";
+            $course['durations'] = $h." hour";
             $course['number_lessons'] = $course->lessons->count();
             return $course;
         });
@@ -144,8 +143,7 @@ class CourseController extends Controller
     {
         $course = Course::with("category", "lessons", "media")->find($id);
         $h = round($course->lessons->pluck("duration")->sum() / 60);
-        $m = $course->lessons->pluck("duration")->sum() % 60;
-        $course['durations'] = $h."h".$m."mn";
+        $course['durations'] = $h." hour";
         $course['number_lessons'] = $course->lessons->count();
 
         return $this->success([
@@ -153,8 +151,12 @@ class CourseController extends Controller
             'header_image' => $course->media->file_url ?? null,
             'title' => $course->title,
             'description' => $course->description,
-            'author' => $course->author,
-            'duration' => $course->duration,
+            'author' => [
+                "id" => $course->author->id,
+                "first_name" => $course->author->first_name,
+                "last_name" => $course->author->last_name,
+            ],
+            'duration' => $course->durations,
             'number_of_lessons' => $course->number_lessons,
             'lessons' => LessonResource::collection($course->lessons),
         ]);

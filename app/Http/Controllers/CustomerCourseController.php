@@ -15,6 +15,12 @@ class CustomerCourseController extends Controller
         $customer_courses = CustomerCourse::where("customer_id", auth()->user()->id)->get();
         $courses = $customer_courses->pluck("course_id");
         $data = Course::with("category","lessons","media")->whereIn("id", $courses)->get();
+        $data = $data->map(function($course) {
+            $h = round($course->lessons->pluck("duration")->sum() / 60);
+            $course['durations'] = $h." hour";
+            $course['number_lessons'] = $course->lessons->count();
+            return $course;
+        });
         return $this->success(CourseResource::collection($data));
 
     }

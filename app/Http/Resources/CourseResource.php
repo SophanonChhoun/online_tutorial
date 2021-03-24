@@ -19,7 +19,11 @@ class CourseResource extends JsonResource
             "header_img" => $this->media->file_url,
             "title" => $this->title,
             "description" => $this->description,
-            "author" => $this->author,
+            "author" => [
+                "id" => $this->author->id,
+                "first_name" => $this->author->first_name,
+                "last_name" => $this->author->last_name,
+            ],
             "category" => $this->category->name ?? null,
             "duration" => $this->durations,
             "number_of_lessons" => $this->number_lessons
