@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Core\MediaLib;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\LessonResource;
+use App\Http\Resources\RecentCourseResource;
 use App\Models\admin\Course;
 use Illuminate\Http\Request;
 use Exception;
@@ -128,8 +129,9 @@ class CourseController extends Controller
         }
     }
 
-    public function getAllCourse(){
-        $courses = Course::with("category", "lessons", "media")->latest()->get();
+    public function getAllCourse()
+    {
+        $courses = Course::with("category", "lessons", "media")->latest()->limit(10)->get();
         $courses = $courses->map(function($course) {
             $h = round($course->lessons->pluck("duration")->sum() / 60);
             $course['durations'] = $h." hour";
@@ -137,6 +139,38 @@ class CourseController extends Controller
             return $course;
         });
         return $this->success(CourseResource::collection($courses));
+    }
+
+    public function searchCourse(Request $request)
+    {
+        try {
+            $courses = Course::with("lessons", "media", "category")->latest();
+            if(isset($request->search))
+            {
+                $courses = $courses->where("title", "LIKE", "%".$request->search."%");
+            }
+            $courses = $courses->get();
+            $courses = $courses->map(function($course) {
+                $h = round($course->lessons->pluck("duration")->sum() / 60);
+                $course['durations'] = $h." hour";
+                $course['number_lessons'] = $course->lessons->count();
+                return $course;
+            });
+            return $this->success(CourseResource::collection($courses));
+        }catch (Exception $exception){
+            return $this->fail($exception->getMessage());
+        }
+    }
+
+    public function allCourse()
+    {
+        try {
+            $courses = Course::latest()->limit(10)->get();
+
+            return $this->success(RecentCourseResource::collection($courses));
+        }catch (Exception $exception){
+            return $this->fail($exception->getMessage());
+        }
     }
 
     public function getCourse($id)

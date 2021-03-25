@@ -31,6 +31,11 @@ Route::middleware(CustomerMiddleware::class)->group(function (){
         Route::get("/{id}", [CourseController::class, 'getCourse']);
     });
 
+    Route::group(["prefix" => "search"], function(){
+       Route::get("/all", [CourseController::class, "allCourse"]);
+       Route::get("", [CourseController::class, "searchCourse"]);
+    });
+
     Route::group(['prefix' => 'user'], function() {
         Route::get("/profile", [CustomerController::class, 'getProfile']);
         Route::put("/profile", [CustomerController::class, 'updateProfile']);
