@@ -42,11 +42,13 @@ class Customer extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+        //attributes convert all colunm name = "password" tobe crype
 
     }
 
     public function media()
     {
         return $this->belongsTo(MediaFile::class,"media_id");
+        //belongsTo category have sub-category
     }
 }

@@ -20,6 +20,8 @@ class Course extends Model
     public function media()
     {
         return $this->hasOne(MediaFile::class,"media_id","media_id");
+        //select * from course inner join category on course.category_id = category.id
+        //return to object {}
     }
     public function category()
     {
@@ -28,6 +30,7 @@ class Course extends Model
     public function lessons()
     {
         return $this->hasMany(CourseLesson::class,"course_id","id");
+        //return toArrays [{}]
 
     }
 
