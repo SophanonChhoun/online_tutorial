@@ -33,6 +33,7 @@ class CourseLessonController extends Controller
             "title" => $lesson->title,
             "duration" => $lesson->duration,
             "video_url" => $lesson->video_url,
+            "video_content" => $lesson->video_content,
             "text_content" => $lesson->text_content,
         ]);
     }

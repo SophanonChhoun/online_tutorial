@@ -143,15 +143,22 @@
                                            placeholder="Video Url">
                                     <span class="help-block">@{{ errors.first('video_ur') }}</span>
                                 </div>
-                                <div class="form-group col-lg-12" :class="{'has-error' : errors.first('video_ur')}">
+                                <div class="form-group col-lg-12">
+                                    <label class="control-label">
+                                        Video Content
+                                    </label>
+                                    <textarea v-model="lesson.video_content" class="form-control" rows="6">
+
+                                    </textarea>
+                                </div>
+                                <div class="form-group col-lg-12">
                                     <label class="control-label">
                                         Text Content
                                     </label>
-                                    <textarea v-model="lesson.text_content" class="form-control">
+                                    <textarea v-model="lesson.text_content" class="form-control" rows="6">
 
-                               </textarea>
+                                    </textarea>
                                 </div>
-
                             </div>
                         </div>
                     </div>

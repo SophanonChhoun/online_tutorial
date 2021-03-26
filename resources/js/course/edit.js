@@ -63,6 +63,7 @@ new Vue({
                     video_url: '',
                     text_content: '',
                     number: '',
+                    video_content: '',
                 },
                 sort: this.data.lessons.length + 1,
             });

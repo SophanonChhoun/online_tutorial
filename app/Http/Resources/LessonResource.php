@@ -20,6 +20,7 @@ class LessonResource extends JsonResource
             'duration' => $this->duration,
             'video_url' => $this->video_url,
             'text_content' => $this->text_content,
+            'video_content' => $this->video_content,
             "number" => $this->number,
         ];
     }

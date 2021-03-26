@@ -44,6 +44,7 @@ class Course extends Model
                "video_url" => $lesson['video_url'],
                "text_content" => $lesson['text_content'],
                "number" => $lesson['number'],
+                "video_content" => $lesson['video_content'],
             ]);
         }
     }

@@ -1443,7 +1443,8 @@ new Vue({
           duration: '',
           video_url: '',
           text_content: '',
-          number: ''
+          number: '',
+          video_content: ''
         },
         sort: this.data.lessons.length + 1
       });

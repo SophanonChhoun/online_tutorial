@@ -14,7 +14,8 @@ class CourseLesson extends Model
         "duration",
         "video_url",
         "text_content",
-        "number"
+        "number",
+        "video_content",
     ];
 
     public function course(){
