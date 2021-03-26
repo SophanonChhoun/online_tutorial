@@ -165,7 +165,7 @@ class CourseController extends Controller
     public function allCourse()
     {
         try {
-            $courses = Course::latest()->limit(10)->get();
+            $courses = Course::latest()->get();
 
             return $this->success(RecentCourseResource::collection($courses));
         }catch (Exception $exception){

@@ -33,7 +33,7 @@ Route::middleware(CustomerMiddleware::class)->group(function (){
 
     Route::group(["prefix" => "search"], function(){
        Route::get("/all", [CourseController::class, "allCourse"]);
-       Route::get("", [CourseController::class, "searchCourse"]);
+       Route::post("", [CourseController::class, "searchCourse"]);
     });
 
     Route::group(['prefix' => 'user'], function() {
