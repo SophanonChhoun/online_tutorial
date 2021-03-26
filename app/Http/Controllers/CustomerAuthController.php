@@ -60,6 +60,7 @@ class CustomerAuthController extends Controller
                 DB::commit();
                 return $this->success([
                     'token' => $auth['access_token'],
+                    'expired_at' => $auth['expired_at'],
                     'email' => $auth['customer']['email'],
                     'first_name' => $auth['customer']['first_name'],
                     'last_name' => $auth['customer']['last_name'],
@@ -116,6 +117,7 @@ class CustomerAuthController extends Controller
             DB::commit();
             return $this->success([
                 'token' => $auth['access_token'],
+                'expired_at' => $auth['expired_at'],
                 'email' => $auth['customer']['email'],
                 'first_name' => $auth['customer']['first_name'],
                 'last_name' => $auth['customer']['last_name'],
