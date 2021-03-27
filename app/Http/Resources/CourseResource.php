@@ -16,17 +16,17 @@ class CourseResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "header_img" => $this->media->file_url,
+            "header_img" => $this->media->file_url ?? null,
             "title" => $this->title,
             "description" => $this->description,
             "author" => [
-                "id" => $this->author->id,
-                "first_name" => $this->author->first_name,
-                "last_name" => $this->author->last_name,
+                "id" => $this->author->id ?? null,
+                "first_name" => $this->author->first_name ?? null,
+                "last_name" => $this->author->last_name ?? null,
             ],
             "category" => $this->category->name ?? null,
-            "duration" => $this->durations,
-            "number_of_lessons" => $this->number_lessons
+            "duration" => $this->durations ?? null,
+            "number_of_lessons" => $this->number_lessons ?? null
         ];
     }
 }
