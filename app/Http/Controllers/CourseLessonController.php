@@ -19,7 +19,7 @@ class CourseLessonController extends Controller
         {
             $data = $data->where("course_id", $request->course);
         }
-        $data = $data->paginate(10);
+        $data = $data->simplePaginate(10);
         $courses = Course::latest()->get();
 
         return view("admin.lesson.list", compact("data", "courses"));

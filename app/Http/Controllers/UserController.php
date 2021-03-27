@@ -50,11 +50,7 @@ class UserController extends Controller
                 "last_name" => $request->last_name,
                 "email" => $request->email,
                 "password" => $request->password,
-                "gender" => $request->gender,
-                "phone_number" => $request->phone_number,
-                "address" => $request->address,
                 "is_enable" => $request->is_enable,
-                "role_id" => $request->role_id
             ];
             if(isset($request['image']))
             {
@@ -96,11 +92,7 @@ class UserController extends Controller
                 "first_name" => $request->first_name,
                 "last_name" => $request->last_name,
                 "email" => $request->email,
-                "gender" => $request->gender,
-                "phone_number" => $request->phone_number,
-                "address" => $request->address,
                 "is_enable" => $request->is_enable,
-                "role_id" => $request->role_id
             ];
             if(isset($request['image']))
             {

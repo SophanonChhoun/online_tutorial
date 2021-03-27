@@ -7,6 +7,7 @@ use App\Http\Resources\CourseResource;
 use App\Http\Resources\LessonResource;
 use App\Http\Resources\RecentCourseResource;
 use App\Models\admin\Course;
+use App\Models\admin\CustomerCourse;
 use Illuminate\Http\Request;
 use Exception;
 use App\Models\admin\Category;
@@ -24,7 +25,7 @@ class CourseController extends Controller
         {
             $data = $data->where("is_enable", $request->is_enable);
         }
-        $data = $data->latest()->paginate(10);
+        $data = $data->latest()->simplePaginate(10);
         $data->getCollection()->transform(function ($course) {
             $h = round($course->lessons->pluck("duration")->sum() / 60);
             $m = $course->lessons->pluck("duration")->sum() % 60;
@@ -179,6 +180,8 @@ class CourseController extends Controller
         $h = round($course->lessons->pluck("duration")->sum() / 60);
         $course['durations'] = $h." hour";
         $course['number_lessons'] = $course->lessons->count();
+        $enroll = CustomerCourse::where("course_id", $id)->where("customer_id", auth()->user()->id)->first();
+        $course['enroll'] = $enroll ? true : false;
 
         return $this->success([
             'id' => $course->id,
@@ -192,6 +195,7 @@ class CourseController extends Controller
             ],
             'duration' => $course->durations,
             'number_of_lessons' => $course->number_lessons,
+            'enroll' => $course['enroll'],
             'lessons' => LessonResource::collection($course->lessons),
         ]);
     }

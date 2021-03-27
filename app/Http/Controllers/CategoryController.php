@@ -20,7 +20,7 @@ class CategoryController extends Controller
         if(isset($request->is_enable)){
             $data = $data->where("is_enable", $request->is_enable);
         }
-        $data = $data->paginate(10);
+        $data = $data->simplePaginate(10);
 
         return view("admin.category.list",compact("data"));
     }

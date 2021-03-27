@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\admin\Booking;
-use App\Models\admin\Hotel;
 use Illuminate\Database\Seeder;
-use App\Models\admin\AboutUs;
+use Database\Seeders\CourseSeeder;
+use Database\Seeders\LessonSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +16,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(UserSeeder::class);
+//        $this->call(UserSeeder::class);
+//        $this->call(CourseSeeder::class);
+//        $this->call(LessonSeeder::class);
+        $this->call(CategorySeeder::class);
     }
 }

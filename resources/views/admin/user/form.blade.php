@@ -50,21 +50,6 @@
                     <span class="help-block">@{{ errors.first('name') }}</span>
                 </div>
 
-                <div class="form-group col-lg-12" :class="{'has-error' : errors.first('phone_number')}">
-                    <label class="control-label">
-                        Phone Number
-                        <span style="color: red">*</span>
-                    </label>
-                    <input type="text"
-                           name="phone_number"
-                           v-model="data.phone_number"
-                           data-vv-as="Phone Number"
-                           v-validate="'required'"
-                           class="form-control"
-                           placeholder="Phone Number">
-                    <span class="help-block">@{{ errors.first('phone_number') }}</span>
-                </div>
-
                 <div class="form-group col-lg-12" :class="{'has-error' : errors.first('email')}">
                     <label class="control-label">
                         Email

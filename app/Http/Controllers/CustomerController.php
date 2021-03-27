@@ -25,7 +25,7 @@ class CustomerController extends Controller
             $customer = $customer->where("is_enable",$request->is_enable);
         }
 
-        $data = $customer->orderBy("id")->paginate(10);
+        $data = $customer->orderBy("id")->simplePaginate(10);
 
         return view("admin.customer.list",compact("data"));
     }

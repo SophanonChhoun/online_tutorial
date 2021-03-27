@@ -20,7 +20,6 @@ class UserSeeder extends Seeder
             "email" => "admin@Admin.com",
             "password" => Hash::make('password'),
             "is_enable" => 1,
-            "role_id" => 2
         ];
         DB::table('users')->insert($data);
     }
