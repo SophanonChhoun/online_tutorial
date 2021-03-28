@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
 use App\Models\admin\Category;
+use App\Models\admin\CourseLesson;
 use App\Models\admin\CustomerCourse;
 use Illuminate\Http\Request;
 use DB;
@@ -93,14 +94,25 @@ class CategoryController extends Controller
     public function listAllCourse()
     {
         $categories = Category::with("courses")->latest()->get();
-        $categories = $categories->map(function($category){
-            $category->courses = $category->courses->map(function($course){
-                $h = round($course->lessons->pluck("duration")->sum() / 60);
-                $course['durations'] = $h." hour";
+        $categories = $categories->filter(function($category){
+            $category->courses = $category->courses->filter(function($course){
+                $h = $course->lessons->pluck("duration")->sum() / 60;
+                if($h >= 1){
+                    $h = round($course->lessons->pluck("duration")->sum() / 60);
+                    $course['durations'] = $h." hour";
+                }else{
+                    $h = $course->lessons->pluck("duration")->sum();
+                    $course['durations'] = $h." min";
+                }
                 $course['number_lessons'] = $course->lessons->count();
-                return $course;
+                $exit = CourseLesson::where("course_id", $course->id)->first();
+                if($exit){
+                    return $course;
+                }
             });
-            return $category;
+            if(count($category->courses) > 0){
+                return $category;
+            }
         });
 
         return $this->success(CategoryResource::collection($categories));
