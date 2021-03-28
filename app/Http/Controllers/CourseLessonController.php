@@ -28,6 +28,10 @@ class CourseLessonController extends Controller
     public function show($id)
     {
         $lesson = CourseLesson::find($id);
+        if(!$lesson)
+        {
+            return $this->fail("Cannot find this lessson");
+        }
         return $this->success([
             "course_id" => $lesson->course_id,
             "title" => $lesson->title,
