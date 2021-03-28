@@ -93,4 +93,39 @@ class CustomerController extends Controller
             return $this->fail($exception->getMessage());
         }
     }
+
+    public function updatePassword(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $customer = Customer::find(auth()->user()->id);
+            if(is_null($customer))
+            {
+                return $this->fail("Customer not found");
+            }
+
+            if(!auth('customer')->attempt([
+                'email' => $customer->email,
+                'password' => $request['old_password'],
+                'is_enable' => true,
+            ])){
+                return $this->fail("Old password is not correct");
+            }
+            $customer->update([
+                'password' => $request['new_password']
+            ]);
+            if(auth('customer')->attempt([
+                "email" => $customer->email,
+                "password" => $request['new_password'],
+                "is_enable" => 1
+            ])){
+                DB::commit();
+                return $this->success("Customer password update successfully");
+            }
+        }catch (Exception $exception){
+            DB::rollback();
+            return $this->fail($exception->getMessage());
+        }
+    }
+
 }
