@@ -39,6 +39,7 @@ Route::middleware(CustomerMiddleware::class)->group(function (){
     Route::group(['prefix' => 'user'], function() {
         Route::get("/profile", [CustomerController::class, 'getProfile']);
         Route::put("/profile", [CustomerController::class, 'updateProfile']);
+        Route::put("/profile/password", [CustomerController::class, 'updatePassword']);
         Route::post("/courses", [CustomerCourseController::class, 'store']);
         Route::delete("/courses", [CustomerCourseController::class, 'destroy']);
         Route::get("/courses", [CustomerCourseController::class, 'index']);
