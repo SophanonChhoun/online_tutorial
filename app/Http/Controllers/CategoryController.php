@@ -95,7 +95,7 @@ class CategoryController extends Controller
     {
         $categories = Category::with("courses")->latest()->get();
         $categories = $categories->filter(function($category){
-            $category->courses = $category->courses->filter(function($course){
+            $category->course = $category->courses->filter(function($course){
                 $h = $course->lessons->pluck("duration")->sum() / 60;
                 if($h >= 1){
                     $h = round($course->lessons->pluck("duration")->sum() / 60);
@@ -110,7 +110,7 @@ class CategoryController extends Controller
                     return $course;
                 }
             });
-            if(count($category->courses) > 0){
+            if(count($category->course) > 0){
                 return $category;
             }
         });
@@ -120,26 +120,31 @@ class CategoryController extends Controller
 
     public function listUserCourse()
     {
-        $categories = Category::with("courses")->latest()->get();
+        $categories = Category::with("courses", "courses.lessons")->latest()->get();
         $user_courses = CustomerCourse::where("customer_id", auth()->user()->id)->get();
-        $user_courses_id = array_pluck($user_courses, "id");
+        $user_courses_id = array_pluck($user_courses, "course_id");
+        $categories = $categories->filter(function ($category) use ($user_courses_id){
+           if(count($category->courses) > 0){
+               $category->course = $category->courses->filter(function ($course) use($user_courses_id){
+                  if(in_array($course->id, $user_courses_id)){
+                      $h = $course->lessons->pluck("duration")->sum() / 60;
+                      if($h >= 1){
+                          $h = round($course->lessons->pluck("duration")->sum() / 60);
+                          $course['durations'] = $h." hour";
+                      }else{
+                          $h = $course->lessons->pluck("duration")->sum();
+                          $course['durations'] = $h." min";
+                      }
+                      $course['number_lessons'] = $course->lessons->count();
+                      return $course;
+                  }
+               })->values();
+               if(count($category->course) > 0){
+                   return $category;
+               }
+           }
 
-        $categories = $categories->filter(function ($category, $key) use($user_courses_id){
-            if($category->courses)
-            {
-                $category->course = $category->courses->filter(function ($course) use($user_courses_id){
-                    if(in_array($course->id, $user_courses_id))
-                    {
-                        return $course;
-                    }
-                });
-
-                if(count($category->course))
-                {
-                    return $category;
-                }
-            }
-        });
+        })->values();
 
         return $this->success(CategoryResource::collection($categories));
     }

@@ -7,6 +7,7 @@ use App\Http\Resources\CourseResource;
 use App\Http\Resources\LessonResource;
 use App\Http\Resources\RecentCourseResource;
 use App\Models\admin\Course;
+use App\Models\admin\CourseLesson;
 use App\Models\admin\CustomerCourse;
 use Illuminate\Http\Request;
 use Exception;
@@ -134,10 +135,12 @@ class CourseController extends Controller
     {
         $courses = Course::with("category", "lessons", "media")->latest()->limit(10)->get();
         $courses = $courses->map(function($course) {
-            $h = round($course->lessons->pluck("duration")->sum() / 60);
-            $course['durations'] = $h." hour";
-            $course['number_lessons'] = $course->lessons->count();
-            return $course;
+            if(count($course->lessons) > 0){
+                $h = round($course->lessons->pluck("duration")->sum() / 60);
+                $course['durations'] = $h." hour";
+                $course['number_lessons'] = $course->lessons->count();
+                return $course;
+            }
         });
         return $this->success(CourseResource::collection($courses));
     }
@@ -151,11 +154,13 @@ class CourseController extends Controller
                 $courses = $courses->where("title", "LIKE", "%".$request->search."%");
             }
             $courses = $courses->get();
-            $courses = $courses->map(function($course) {
-                $h = round($course->lessons->pluck("duration")->sum() / 60);
-                $course['durations'] = $h." hour";
-                $course['number_lessons'] = $course->lessons->count();
-                return $course;
+            $courses = $courses->filter(function($course) {
+                if(count($course->lessons) > 0){
+                    $h = round($course->lessons->pluck("duration")->sum() / 60);
+                    $course['durations'] = $h." hour";
+                    $course['number_lessons'] = $course->lessons->count();
+                    return $course;
+                }
             });
             return $this->success(CourseResource::collection($courses));
         }catch (Exception $exception){
@@ -167,7 +172,11 @@ class CourseController extends Controller
     {
         try {
             $courses = Course::latest()->get();
-
+            $courses = $courses->filter(function($course) {
+               if (CourseLesson::where("course_id", $course->id)->first()) {
+                   return $course;
+               }
+            });
             return $this->success(RecentCourseResource::collection($courses));
         }catch (Exception $exception){
             return $this->fail($exception->getMessage());

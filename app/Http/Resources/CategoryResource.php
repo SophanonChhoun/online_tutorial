@@ -16,7 +16,7 @@ class CategoryResource extends JsonResource
     {
         return [
             "name" => $this->name,
-            "courses" => CourseResource::collection($this->courses)
+            "courses" => CourseResource::collection($this->course) ?? null,
         ];
     }
 }
