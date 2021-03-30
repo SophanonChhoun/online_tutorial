@@ -43,7 +43,6 @@ Route::middleware(CustomerMiddleware::class)->group(function (){
         Route::post("/courses", [CustomerCourseController::class, 'store']);
         Route::delete("/courses", [CustomerCourseController::class, 'destroy']);
         Route::get("/courses", [CustomerCourseController::class, 'index']);
-        Route::get("/notes", [NoteController::class, "userNote"]);
         Route::get("/category", [CategoryController::class, "listUserCourse"]);
     });
     Route::group(['prefix' => 'notes'], function (){
@@ -51,6 +50,7 @@ Route::middleware(CustomerMiddleware::class)->group(function (){
         Route::get("/{id}", [NoteController::class, 'show']);
         Route::delete("/{id}", [NoteController::class, 'destroy']);
         Route::put("/{id}", [NoteController::class, 'update']);
+        Route::get("", [NoteController::class, 'index']);
     });
     Route::group(['prefix' => 'lessons'], function(){
        Route::get("/{id}", [CourseLessonController::class, "show"]);

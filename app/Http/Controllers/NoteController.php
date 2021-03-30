@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NoteRequest;
 use App\Http\Resources\UserNoteResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\NoteResource;
 use App\Models\admin\Note;
@@ -31,9 +32,11 @@ class NoteController extends Controller
     public function show($id, Request $request)
     {
         try {
-            return new NoteResource(Note::where('id', $id)
-                ->where('user_id', $request->user()['id'])
-                ->firstOrFail());
+            $note = Note::findOrFail($id);
+            if ($note->user->id != $request->user()['id']) {
+                return response()->json(['error' => 'Note does not belong to user'], 401);
+            }
+            return $this->success(new NoteResource($note));
 
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Note not found'], 400);
@@ -68,14 +71,14 @@ class NoteController extends Controller
         }
     }
 
-    public function userNote()
+    public function index(Request $request)
     {
-        try {
-            $notes = Note::with("lesson", "lesson.course")->where("user_id", auth()->user()->id)->latest()->get();
-
-            return $this->success(UserNoteResource::collection($notes));
-        }catch (ModelNotFoundException $exception){
-            return $this->fail("There is an error");
+        $notes = Note::with("lesson", "lesson.course")->where('user_id', $request->user()['id']);
+        if (isset($request['lesson_id'])) {
+            $notes->where('lesson_id', $request['lesson_id']);
+            $foundNote = $notes->first();
+            return $foundNote ? $this->success(new NoteResource($foundNote)) : response()->noContent();
         }
+        return $this->success(UserNoteResource::collection($notes->get()));
     }
 }
