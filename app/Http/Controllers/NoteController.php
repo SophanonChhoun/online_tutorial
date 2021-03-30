@@ -81,4 +81,15 @@ class NoteController extends Controller
         }
         return $this->success(UserNoteResource::collection($notes->get()));
     }
+
+    public function getByLesson($id, Request $request)
+    {
+        $notes = Note::with("lesson", "lesson.course")->where('user_id', $request->user()['id']);
+        if (isset($id)) {
+            $notes->where('lesson_id', $id);
+            $foundNote = $notes->first();
+            return $foundNote ? $this->success(new NoteResource($foundNote)) : response()->noContent();
+        }
+        return $this->success(UserNoteResource::collection($notes->get()));
+    }
 }

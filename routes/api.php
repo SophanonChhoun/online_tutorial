@@ -51,6 +51,7 @@ Route::middleware(CustomerMiddleware::class)->group(function (){
         Route::delete("/{id}", [NoteController::class, 'destroy']);
         Route::put("/{id}", [NoteController::class, 'update']);
         Route::get("", [NoteController::class, 'index']);
+        Route::get("/lesson/{id}", [NoteController::class, 'getByLesson']);
     });
     Route::group(['prefix' => 'lessons'], function(){
        Route::get("/{id}", [CourseLessonController::class, "show"]);
