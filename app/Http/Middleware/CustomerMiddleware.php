@@ -29,7 +29,6 @@ class CustomerMiddleware
             ->join('customers', 'customers.id', 'customer_login_accesses.customer_id')
             ->where('customers.is_enable', true)
             ->where('customer_login_accesses.revoked', false)
-            ->where('customer_login_accesses.expired_at', '>', DateLib::getNow()->toDateTimeString())
             ->get(['customers.id'])->first();
 
         if($auth){
