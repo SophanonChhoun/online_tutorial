@@ -11,5 +11,5 @@ run:
 -   npm run dev
 
 In order to log into the backend:
-email: admin@Admin.com
-password: password
+-   email: admin@Admin.com
+-   password: password
