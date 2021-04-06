@@ -2,13 +2,13 @@
 
 @section("content")
     <div class="container-fluid">
-        <h1 class="mt-4">User</h1>
+        <h1 class="mt-4">Lesson</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">
                 <a href="{{ url('admin/dashboard') }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                Users
+                Lessons
             </li>
         </ol>
 
