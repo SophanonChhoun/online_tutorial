@@ -9,6 +9,7 @@ use App\Http\Resources\RecentCourseResource;
 use App\Models\admin\Course;
 use App\Models\admin\CourseLesson;
 use App\Models\admin\CustomerCourse;
+use App\Models\customer\UserLesson;
 use Illuminate\Http\Request;
 use Exception;
 use App\Models\admin\Category;

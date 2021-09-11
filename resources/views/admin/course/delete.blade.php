@@ -12,7 +12,7 @@
                     <p>Are you sure you want to delete {{ $course->name ?? null }}?</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ url('admin/category/delete/'.$course->id) }}" method="post">
+                    <form action="{{ url('admin/course/delete/'.$course->id) }}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-danger">@lang('general.delete')</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">@lang('general.close')</button>

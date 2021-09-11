@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CourseResource;
 use App\Models\admin\Course;
+use App\Models\admin\CourseLesson;
 use App\Models\admin\CustomerCourse;
+use App\Models\customer\UserLesson;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -36,7 +38,11 @@ class CustomerCourseController extends Controller
                "customer_id" => auth()->user()->id,
                "course_id" => $request->course_id,
             ]);
-
+            $lessons = CourseLesson::where("course_id", $request->course_id)->get();
+            $registeredLesson= UserLesson::registerCourse(auth()->user()->id, $request->course_id, $lessons);
+            if(!$registeredLesson) {
+                return $this->fail("There is error in register lesson");
+            }
             return $this->success("Enroll Success");
         }catch (Exception $exception){
             return $this->fail($exception->getMessage());
@@ -47,7 +53,7 @@ class CustomerCourseController extends Controller
     {
         try {
             CustomerCourse::where("customer_id", auth()->user()->id)->where("course_id", $request->course_id)->delete();
-
+            UserLesson::where("user_id", auth()->user()->id)->where("course_id", $request->course_id)->delete();
             return $this->success("Unenroll Success");
         }catch (Exception $exception){
             return $this->fail($exception->getMessage());
